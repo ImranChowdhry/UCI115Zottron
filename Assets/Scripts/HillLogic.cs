@@ -6,16 +6,21 @@ using UnityEngine;
 public class HillLogic : MonoBehaviour
 {
     private GameObject player1;
+    private GameObject player2;
+
     private Color player1OriginalColor;
 
-    public Text hillTimerText;
+    public Text hillTimer1Text;
+    public Text hillTimer2Text;
 
     // Use this for initialization
     void Start ()
     {
         player1 = GameObject.FindGameObjectWithTag("Player1");
+        player2 = GameObject.FindGameObjectWithTag("Player2");
         player1OriginalColor = player1.GetComponent<SpriteRenderer>().color;
-        setPlayerHillCountText(1);
+        setPlayer1HillCountText();
+        setPlayer2HillCountText();
     }
 	
 	// Update is called once per frame
@@ -26,6 +31,8 @@ public class HillLogic : MonoBehaviour
 
     private void winner(GameObject player)
     {
+        setPlayer1HillCountText();
+        setPlayer2HillCountText();
         if (player.GetComponent<Player>().hillTimer >= 1.00)
         {
             print("Hello");
@@ -37,8 +44,14 @@ public class HillLogic : MonoBehaviour
         if(collision.tag == "Player1")
         {
             player1.GetComponent<Player>().hillTimer += Time.deltaTime;
-            setPlayerHillCountText(1);
+            setPlayer1HillCountText();
             player1.GetComponent<SpriteRenderer>().color = new Color(1f, 0.30196078f, 0.30196078f);
+        }
+        if (collision.tag == "Player2")
+        {
+            player2.GetComponent<Player>().hillTimer += Time.deltaTime;
+            setPlayer2HillCountText();
+            player2.GetComponent<SpriteRenderer>().color = new Color(1f, 0.30196078f, 0.30196078f);
         }
     }
 
@@ -47,8 +60,14 @@ public class HillLogic : MonoBehaviour
         if (collision.tag == "Player1")
         {
             player1.GetComponent<Player>().hillTimer += Time.deltaTime;
-            setPlayerHillCountText(1);
+            setPlayer1HillCountText();
             player1.GetComponent<SpriteRenderer>().color = new Color(1f, 0.30196078f, 0.30196078f);
+        }
+        if (collision.tag == "Player2")
+        {
+            player2.GetComponent<Player>().hillTimer += Time.deltaTime;
+            setPlayer2HillCountText();
+            player2.GetComponent<SpriteRenderer>().color = new Color(1f, 0.30196078f, 0.30196078f);
         }
     }
 
@@ -58,10 +77,19 @@ public class HillLogic : MonoBehaviour
         {
             player1.GetComponent<SpriteRenderer>().color = player1OriginalColor;
         }
+        if (collision.tag == "Player2")
+        {
+            player2.GetComponent<SpriteRenderer>().color = player1OriginalColor;
+        }
     }
 
-    void setPlayerHillCountText(int player)
+    void setPlayer1HillCountText()
     {
-        hillTimerText.text = "Player " + player.ToString() + " time in hill: " + player1.GetComponent<Player>().hillTimer.ToString("F2");
+        hillTimer1Text.text = "Player 1 time in hill: " + player1.GetComponent<Player>().hillTimer.ToString("F2");
+    }
+
+    void setPlayer2HillCountText()
+    {
+        hillTimer2Text.text = "Player 2 time in hill: " + player2.GetComponent<Player>().hillTimer.ToString("F2");
     }
 }
