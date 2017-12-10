@@ -21,7 +21,16 @@ public class HillLogic : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	}
+        winner(player1);
+    }
+
+    private void winner(GameObject player)
+    {
+        if (player.GetComponent<Player>().hillTimer >= 1.00)
+        {
+            print("Hello");
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
