@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         }
         if (gameObject.tag == player2.tag)
         {
-            if (direction < 0 && !player2facingright || direction > 0 && player2facingright)
+            if (direction > 0 && !player2facingright || direction < 0 && player2facingright)
             {
                 player2facingright = !player2facingright;
                 Vector3 scale = player2.transform.localScale;
