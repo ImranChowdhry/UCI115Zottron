@@ -81,7 +81,6 @@
     <Compile Include="Assets\Main Menu UI\Scripts\DragMe.cs" />
     <Compile Include="Assets\Main Menu UI\Scripts\DragPanel.cs" />
     <Compile Include="Assets\Main Menu UI\Scripts\DropMe.cs" />
-    <Compile Include="Assets\Main Menu UI\Scripts\GroundCheck.cs" />
     <Compile Include="Assets\Main Menu UI\Scripts\PanelManager.cs" />
     <Compile Include="Assets\Main Menu UI\Scripts\ResizePanel.cs" />
     <Compile Include="Assets\Main Menu UI\Scripts\ScrollDetailTexture.cs" />
@@ -89,6 +88,7 @@
     <Compile Include="Assets\Main Menu UI\Scripts\TiltWindow.cs" />
     <Compile Include="Assets\Scripts\BulletImpact.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
+    <Compile Include="Assets\Scripts\GroundCheck.cs" />
     <Compile Include="Assets\Scripts\HillLogic.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />

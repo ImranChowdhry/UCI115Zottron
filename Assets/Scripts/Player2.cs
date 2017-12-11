@@ -66,12 +66,12 @@ public class Player2 : MonoBehaviour
 
     private void Update()
     {
-        direction = Input.GetAxis("Horizontal2");
+        direction = Input.GetAxis("Horizontal");
         flip(direction);
         {
 
         }
-        if (Input.GetButtonDown("Left") || Input.GetButtonDown("a"))
+        if (Input.GetButton("Left"))
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             if (playFootSound && canJump)
@@ -79,7 +79,7 @@ public class Player2 : MonoBehaviour
                 StartCoroutine(FootStepSound());
             }
         }
-        if (Input.GetButtonDown("Right") || Input.GetButtonDown("d"))
+        if (Input.GetButton("Right"))
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             if (playFootSound && canJump)
@@ -88,23 +88,23 @@ public class Player2 : MonoBehaviour
             }
         }
         //When the arrow keys are not being pressed, set moveSpeed to 0
-        if (InputManager.MainJoystick() == Vector3.zero)
+        if (!Input.GetButton("Right") && !Input.GetButton("Left"))
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
-        if (Input.GetButtonDown("space") && canJump)
+        if (Input.GetButtonDown("Run") && canJump)
         {
             moveSpeed = accelSpeed;
         }
         //Not Running
-        if (!InputManager.J_Run())
+        if (!Input.GetButton("Run"))
         {
             moveSpeed = tempSpeed;
         }
 
         //Assigning Space to Jump
-        if (InputManager.X_Button() && canJump)
+        if (Input.GetButtonDown("Jump") && canJump)
         {
             GetComponent<AudioSource>().PlayOneShot(jumpSound);
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);

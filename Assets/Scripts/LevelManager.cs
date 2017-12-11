@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
 
     void setPlayer2HealthCountText()
     {
-        //player2HealthText.text = "Player 2 Health: " + player2.GetComponent<Player2>().playerHealth.ToString();
+        player2HealthText.text = "Player 2 Health: " + player2.GetComponent<Player2>().playerHealth.ToString();
     }
 
     void respawnCheck()
@@ -52,12 +52,12 @@ public class LevelManager : MonoBehaviour
         {
             StartCoroutine(RespawnPlayer1());
         }
-        /*
+        
         if (player2.activeSelf == false && respawnFlag2)
         {
             StartCoroutine(RespawnPlayer2());
         }
-        */
+        
     }
 
     IEnumerator RespawnPlayer1()

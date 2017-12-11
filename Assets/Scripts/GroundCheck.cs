@@ -10,10 +10,12 @@ public class GroundCheck : MonoBehaviour {
 	void Start () {
        if (transform.parent.tag == "Player1")
         {
+            print("Hello1");
             p1 = GetComponentInParent<Player1>();
         }
         else if (transform.parent.tag == "Player2")
         {
+            print("Hello");
             p2 = GetComponentInParent<Player2>();
         }
     }

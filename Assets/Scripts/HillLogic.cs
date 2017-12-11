@@ -29,7 +29,7 @@ public class HillLogic : MonoBehaviour
         player1 = GameObject.FindGameObjectWithTag("Player1");
         player2 = GameObject.FindGameObjectWithTag("Player2");
         player1OriginalColor = player1.GetComponent<SpriteRenderer>().color;
-        //player2OriginalColor = player2.GetComponent<SpriteRenderer>().color;
+        player2OriginalColor = player2.GetComponent<SpriteRenderer>().color;
         setPlayer1HillCountText();
         setPlayer2HillCountText();
 
@@ -84,11 +84,11 @@ public class HillLogic : MonoBehaviour
     {
         setPlayer1HillCountText();
         setPlayer2HillCountText();
-        if (player1.GetComponent<Player1>().hillTimer >= 1.00)
+        if (player1.GetComponent<Player1>().hillTimer >= 100.0)
         {
             print("Hello player 1");
         }
-        else if (player1.GetComponent<Player1>().hillTimer >= 1.00)
+        else if (player1.GetComponent<Player1>().hillTimer >= 100.0)
         {
             print("Hello player 2");
         }
@@ -145,6 +145,6 @@ public class HillLogic : MonoBehaviour
 
     void setPlayer2HillCountText()
     {
-        //hillTimer2Text.text = "Player 2 time in hill: " + player2.GetComponent<Player2>().hillTimer.ToString("F2");
+        hillTimer2Text.text = "Player 2 time in hill: " + player2.GetComponent<Player2>().hillTimer.ToString("F2");
     }
 }

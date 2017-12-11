@@ -6,22 +6,23 @@ public class PlayerManager : MonoBehaviour
 {
     Player1 p1;
     Player2 p2;
-    Animator anim;
+    Animator anim1, anim2;
     bool airBorn;
 
     // Use this for initialization
     void Start()
     {
-        anim = GetComponent<Animator>();
         p1 = GetComponentInParent<Player1>();
         p2 = GetComponentInParent<Player2>();
+        anim1 = p1.GetComponent<Animator>();
+        anim2 = p2.GetComponent<Animator>();
         airBorn = false;
     }
 
     void OnTriggerEnter2D()
     {
         airBorn = false;
-        anim.SetInteger("State", 0);
+        anim1.SetInteger("State", 0);
     }
 
     private void OnTriggerExit2D()
@@ -29,7 +30,7 @@ public class PlayerManager : MonoBehaviour
         airBorn = true;
         if (airBorn)
         {
-            anim.SetInteger("State", 2);
+            anim1.SetInteger("State", 2);
         }
     }
 
@@ -38,23 +39,39 @@ public class PlayerManager : MonoBehaviour
     {
         if (InputManager.MainJoystick() == Vector3.zero && airBorn == false)
         {
-            anim.SetInteger("State", 0);
+            anim1.SetInteger("State", 0);
         }
         if (InputManager.MainJoystick().x > 0.0 && airBorn == false)
         {
-            anim.SetInteger("State", 1);
+            anim1.SetInteger("State", 1);
         }
         if (InputManager.MainJoystick().x < 0.0 && airBorn == false)
         {
-            anim.SetInteger("State", 1);
+            anim1.SetInteger("State", 1);
         }
         if (InputManager.MainJoystick().y > 0.0)
         {
-            anim.SetInteger("State", 0);
+            anim1.SetInteger("State", 0);
         }
         if (InputManager.MainJoystick().y > 0.0)
         {
-            anim.SetInteger("State", 0);
+            anim1.SetInteger("State", 0);
+        }
+
+
+
+
+        if (!Input.GetButton("Right") && !Input.GetButton("Left") && airBorn == false)
+        {
+            anim2.SetInteger("State", 0);
+        }
+        if (Input.GetButton("Right") && airBorn == false)
+        {
+            anim2.SetInteger("State", 1);
+        }
+        if (Input.GetButton("Left") && airBorn == false)
+        {
+            anim2.SetInteger("State", 1);
         }
     }
 }
