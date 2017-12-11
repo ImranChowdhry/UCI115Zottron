@@ -18,7 +18,7 @@ public class CameraShake : MonoBehaviour
             transform.position = new Vector3(transform.position.x + shakePos.x, transform.position.y + shakePos.y, transform.position.z);
             shakeTimer -= Time.deltaTime;
         }
-        if (InputManager.Fire())
+        if (InputManager.J_Fire())
         {
             ShakeCamera(shakePower, shakeDuration);
         }

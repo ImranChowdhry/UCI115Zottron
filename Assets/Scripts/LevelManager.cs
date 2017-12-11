@@ -6,61 +6,105 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     private GameObject player1;
-    public float respawnTime;
-    private bool respawnFlag;
-    public AudioClip deathsound1;
-    public AudioClip deathsound2;
+    private GameObject player2;
 
-    public Text playerHealthText;
+    public float respawnTime;
+    private bool respawnFlag1;
+    private bool respawnFlag2;
+    public AudioClip deathSound;
+    public AudioClip respawnSound1;
+    public AudioClip respawnSound2;
+
+    public Text player1HealthText;
+    public Text player2HealthText;
     // Use this for initialization
     void Start ()
     {
         player1 = GameObject.FindGameObjectWithTag("Player1");
-        respawnFlag = true;
-        setPlayerHealthCountText(1);
+        player2 = GameObject.FindGameObjectWithTag("Player2");
+        respawnFlag1 = true;
+        respawnFlag2 = true;
+        setPlayer1HealthCountText();
+        setPlayer2HealthCountText();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        setPlayerHealthCountText(1);
+        setPlayer1HealthCountText();
+        setPlayer2HealthCountText();
         respawnCheck();
     }
 
-    void setPlayerHealthCountText(int player)
+    void setPlayer1HealthCountText()
     {
-        playerHealthText.text = "Player " + player.ToString() + " Health: " + player1.GetComponent<Player>().playerHealth.ToString();
+        player1HealthText.text = "Player 1 Health: " + player1.GetComponent<Player1>().playerHealth.ToString();
+    }
+
+    void setPlayer2HealthCountText()
+    {
+        //player2HealthText.text = "Player 2 Health: " + player2.GetComponent<Player2>().playerHealth.ToString();
     }
 
     void respawnCheck()
     {
-        if(player1.activeSelf == false && respawnFlag)
+        if(player1.activeSelf == false && respawnFlag1)
         {
-            StartCoroutine(Respawn());
+            StartCoroutine(RespawnPlayer1());
         }
+        /*
+        if (player2.activeSelf == false && respawnFlag2)
+        {
+            StartCoroutine(RespawnPlayer2());
+        }
+        */
     }
 
-    IEnumerator Respawn()
+    IEnumerator RespawnPlayer1()
     {
-        respawnFlag = false;
-        if (Random.Range(0.0f, 1.0f) >= 0.5f)
+        respawnFlag1 = false;
+
+        GetComponent<AudioSource>().PlayOneShot(deathSound);
+
+        yield return new WaitForSeconds(respawnTime);
+
+        player1.transform.position = new Vector3(-27f, -20.0f, transform.position.z);
+        player1.GetComponent<Player1>().playerHealth = 100;
+        player1.SetActive(true);
+
+        if (Random.Range(0.0f, 1.0f) <= 0.5f)
         {
-            GetComponent<AudioSource>().PlayOneShot(deathsound1);
+            GetComponent<AudioSource>().PlayOneShot(respawnSound1);
         }
         else
         {
-            GetComponent<AudioSource>().PlayOneShot(deathsound2);
+            GetComponent<AudioSource>().PlayOneShot(respawnSound2);
         }
+
+        respawnFlag1 = true;
+    }
+
+    IEnumerator RespawnPlayer2()
+    {
+        respawnFlag2 = false;
+
+        GetComponent<AudioSource>().PlayOneShot(deathSound);
+
         yield return new WaitForSeconds(respawnTime);
-        if (gameObject.tag == "Player1")
+
+        player2.transform.position = new Vector3(27f, -20.0f, transform.position.z);
+        player2.GetComponent<Player2>().playerHealth = 100;
+        player2.SetActive(true);
+
+        if (Random.Range(0.0f, 1.0f) <= 0.5f)
         {
-            player1.transform.position = new Vector3(-20f, -25.5f, transform.position.z);
-            player1.SetActive(true);
+            GetComponent<AudioSource>().PlayOneShot(respawnSound1);
         }
-        else if (gameObject.tag == "Player2")
+        else
         {
-            player1.transform.position = new Vector3(-20, -25, transform.position.z);
+            GetComponent<AudioSource>().PlayOneShot(respawnSound2);
         }
-        respawnFlag = true;
+
+        respawnFlag2 = true;
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    Player p;
+    Player1 p1;
+    Player2 p2;
     Animator anim;
     bool airBorn;
 
@@ -12,7 +13,8 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        p = GetComponentInParent<Player>();
+        p1 = GetComponentInParent<Player1>();
+        p2 = GetComponentInParent<Player2>();
         airBorn = false;
     }
 
@@ -34,19 +36,23 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKey("right"))
-        {
-            anim.SetInteger("State", 1);
-        }
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKey("left"))
-        {
-            anim.SetInteger("State", 1);
-        }
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp("right"))
+        if (InputManager.MainJoystick() == Vector3.zero && airBorn == false)
         {
             anim.SetInteger("State", 0);
         }
-        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp("left"))
+        if (InputManager.MainJoystick().x > 0.0 && airBorn == false)
+        {
+            anim.SetInteger("State", 1);
+        }
+        if (InputManager.MainJoystick().x < 0.0 && airBorn == false)
+        {
+            anim.SetInteger("State", 1);
+        }
+        if (InputManager.MainJoystick().y > 0.0)
+        {
+            anim.SetInteger("State", 0);
+        }
+        if (InputManager.MainJoystick().y > 0.0)
         {
             anim.SetInteger("State", 0);
         }
