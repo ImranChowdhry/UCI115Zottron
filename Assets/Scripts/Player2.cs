@@ -59,14 +59,17 @@ public class Player2 : MonoBehaviour
                 facingRight = !facingRight;
                 Vector3 scale = transform.localScale;
                 scale.x *= -1;
-                transform.localScale = scale;
+                if (gameObject.tag == "Player2")
+                {
+                    transform.localScale = scale;
+                }
             }
         }
     }
 
     private void Update()
     {
-        direction = Input.GetAxis("Horizontal");
+        direction = Input.GetAxis("Horizontal2");
         flip(direction);
         {
 
